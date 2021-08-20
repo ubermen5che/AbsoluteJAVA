@@ -3,10 +3,10 @@ package CH4.rating;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
+import static CH4.rating.CalculateAverageRatingForProduct.*;
 
 public class CalculateAverageRatingForProduct {
     //CSV file의 row는 각 고객이 5개의 상품 각각에 대한 평가를 나타냄.
@@ -63,16 +63,16 @@ public class CalculateAverageRatingForProduct {
     public void PrintResult(HashMap<String, ArrayList<Integer>> customerRating
     , CalculateAverageRatingForProduct calculateAverageRatingForProduct) throws IOException{
 
-        Integer numOfCustomer = customerRating.get(calculateAverageRatingForProduct.mapProductToKey(0)).size();
+        Integer numOfCustomer = customerRating.get(mapProductToKey(0)).size();
         System.out.println("customerRating = " + customerRating);
         System.out.println("Product | rating average");
         for(int i = 0; i < customerRating.size(); i++){
             int sum = 0;
             for(int j = 0; j < numOfCustomer; j++){
-                String keyofProduct = calculateAverageRatingForProduct.mapProductToKey(i);
+                String keyofProduct = mapProductToKey(i);
                 sum += customerRating.get(keyofProduct).get(j);
             }
-            String keyofProduct = calculateAverageRatingForProduct.mapProductToKey(i);
+            String keyofProduct = mapProductToKey(i);
             double ratingAverage = (double)sum / numOfCustomer;
             System.out.println(String.format("%s\t\t\t%.4f", keyofProduct, ratingAverage));
         }
